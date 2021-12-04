@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NextPage } from "next";
 
 import { Layout } from "~/src/components/Layout";
-import { Container } from "~/theme/components";
+import { Filters } from "~/src/components/Filters/Filters";
 
 interface TProps {
   // products: TProduct[];
@@ -11,7 +11,7 @@ interface TProps {
 const IndexPage: NextPage<TProps> = () => {
   return (
     <Layout title="Home page">
-      <Container>Font</Container>
+      <Filters />
     </Layout>
   );
 };
