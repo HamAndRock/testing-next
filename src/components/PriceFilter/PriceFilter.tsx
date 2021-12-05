@@ -1,26 +1,25 @@
-import { setMaxListeners } from "process";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import {
   StyledWrapper,
-  Name,
-  Container,
-  FirstInput,
-  SecondInput,
-  Slider,
-  SliderTrack,
-  SliderRange,
-  NumberInputs,
-  NumberInput,
-  NumberInputWrapper,
+  StyledName,
+  StyledContainer,
+  StyledFirstInput,
+  StyledSecondInput,
+  StyledSlider,
+  StyledSliderTrack,
+  StyledSliderRange,
+  StyledNumberInputs,
+  StyledNumberInput,
+  StyledNumberInputWrapper,
 } from "./styled";
 
-interface MultiRangeSliderProps {
+interface Props {
   min: number;
   max: number;
 }
 
-const ProductPriceRange: React.FC<MultiRangeSliderProps> = ({ min, max }) => {
+const PriceFilter: React.FC<Props> = ({ min, max }) => {
   const [minVal, setMinVal] = useState(min);
   const [maxVal, setMaxVal] = useState(max);
   const minValRef = useRef<HTMLInputElement>(null);
@@ -37,7 +36,7 @@ const ProductPriceRange: React.FC<MultiRangeSliderProps> = ({ min, max }) => {
   useEffect(() => {
     if (maxValRef.current) {
       const minPercent = getPercent(minVal);
-      const maxPercent = getPercent(+maxValRef.current.value); // Precede with '+' to convert the value from type string to type number
+      const maxPercent = getPercent(+maxValRef.current.value);
 
       if (range.current) {
         range.current.style.left = `${minPercent}%`;
@@ -60,9 +59,9 @@ const ProductPriceRange: React.FC<MultiRangeSliderProps> = ({ min, max }) => {
 
   return (
     <StyledWrapper>
-      <Name>Cena za den</Name>
-      <Container>
-        <FirstInput
+      <StyledName>Cena za den</StyledName>
+      <StyledContainer>
+        <StyledFirstInput
           type="range"
           min={min}
           max={max}
@@ -76,7 +75,7 @@ const ProductPriceRange: React.FC<MultiRangeSliderProps> = ({ min, max }) => {
           }}
           className="thumb"
         />
-        <SecondInput
+        <StyledSecondInput
           type="range"
           min={min}
           max={max}
@@ -88,37 +87,45 @@ const ProductPriceRange: React.FC<MultiRangeSliderProps> = ({ min, max }) => {
           }}
           className="thumb"
         />
-        <Slider>
-          <SliderTrack />
-          <SliderRange ref={range} />
-        </Slider>
-      </Container>
-      <NumberInputs>
-        <NumberInputWrapper>
-          <NumberInput
+        <StyledSlider>
+          <StyledSliderTrack />
+          <StyledSliderRange ref={range} />
+        </StyledSlider>
+      </StyledContainer>
+      <StyledNumberInputs>
+        <StyledNumberInputWrapper>
+          <StyledNumberInput
             type="text"
             value={minVal.toLocaleString()}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               const clearValue = event.target.value.replace(/\D/g, "");
-              const value = +clearValue > max ? max : +clearValue;
+              const value = +clearValue > maxVal ? maxVal - 1 : +clearValue;
+              // > max
+              // ? max
+              // : +clearValue;
               setMinVal(value);
             }}
           />
-        </NumberInputWrapper>
-        <NumberInputWrapper>
-          <NumberInput
+        </StyledNumberInputWrapper>
+        <StyledNumberInputWrapper>
+          <StyledNumberInput
             type="text"
             value={maxVal.toLocaleString()}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               const clearValue = event.target.value.replace(/\D/g, "");
-              const value = +clearValue > max ? max : +clearValue;
+              const value =
+                +clearValue > max
+                  ? max
+                  : +clearValue < minVal
+                  ? minVal + 1
+                  : +clearValue;
               setMaxVal(value);
             }}
           />
-        </NumberInputWrapper>
-      </NumberInputs>
+        </StyledNumberInputWrapper>
+      </StyledNumberInputs>
     </StyledWrapper>
   );
 };
 
-export { ProductPriceRange };
+export { PriceFilter };

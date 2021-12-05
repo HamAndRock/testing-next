@@ -1,9 +1,22 @@
-import { styled } from "~/theme";
+import { css, styled } from "~/theme";
 
 interface Props {
   myPropMax: number;
   myPropMin: number;
 }
+
+const styles = css`
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  margin-top: 4px;
+  pointer-events: all;
+  cursor: pointer;
+  position: relative;
+  background-color: ${({ theme }) => theme.colors.green};
+`;
 
 export const StyledWrapper = styled.div`
   flex-basis: 30%;
@@ -15,40 +28,38 @@ export const StyledWrapper = styled.div`
   border-right: 1px solid;
   padding: ${({ theme }) => theme.rem(16)};
   border-color: ${({ theme }) => theme.colors.beige};
+
+  input[type="range"] {
+    -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+    background: transparent; /* Otherwise white in Chrome */
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    ${styles};
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    ${styles};
+  }
+
+  input[type="range"]::-ms-thumb {
+    ${styles};
+  }
 `;
 
-export const Name = styled.div`
+export const StyledName = styled.div`
   color: ${({ theme }) => theme.colors.darkGrey};
   margin-bottom: ${({ theme }) => theme.rem(26)};
 `;
 
-export const Container = styled.div`
+export const StyledContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: ${({ theme }) => theme.rem(26)};
-
-  .thumb {
-    &::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      border: none;
-      cursor: pointer;
-      margin-top: ${({ theme }) => theme.rem(4)};
-      pointer-events: all;
-      position: relative;
-    }
-
-    &::-moz-range-thumb {
-      border: none;
-      cursor: pointer;
-      margin-top: ${({ theme }) => theme.rem(4)};
-      pointer-events: all;
-      position: relative;
-    }
-  }
 `;
 
-export const FirstInput = styled.input<Props>`
+export const StyledFirstInput = styled.input<Props>`
   pointer-events: none;
   position: absolute;
   height: 0;
@@ -58,7 +69,7 @@ export const FirstInput = styled.input<Props>`
   ${({ myPropMax, myPropMin }) => myPropMin > myPropMax - 100 && `z-index: 5`}
 `;
 
-export const SecondInput = styled.input`
+export const StyledSecondInput = styled.input`
   pointer-events: none;
   position: absolute;
   height: 0;
@@ -67,12 +78,12 @@ export const SecondInput = styled.input`
   z-index: 4;
 `;
 
-export const Slider = styled.div`
+export const StyledSlider = styled.div`
   position: relative;
   width: ${({ theme }) => theme.rem(328)};
 `;
 
-export const SliderTrack = styled.div`
+export const StyledSliderTrack = styled.div`
   position: absolute;
   border-radius: ${({ theme }) => theme.rem(3)};
   height: ${({ theme }) => theme.rem(4)};
@@ -81,7 +92,7 @@ export const SliderTrack = styled.div`
   z-index: 1;
 `;
 
-export const SliderRange = styled.div`
+export const StyledSliderRange = styled.div`
   position: absolute;
   border-radius: ${({ theme }) => theme.rem(3)};
   height: ${({ theme }) => theme.rem(4)};
@@ -89,12 +100,12 @@ export const SliderRange = styled.div`
   z-index: 2;
 `;
 
-export const NumberInputs = styled.div`
+export const StyledNumberInputs = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 
-export const NumberInputWrapper = styled.div`
+export const StyledNumberInputWrapper = styled.div`
   position: relative;
   max-width: ${({ theme }) => theme.rem(116)};
   height: ${({ theme }) => theme.rem(48)};
@@ -110,7 +121,7 @@ export const NumberInputWrapper = styled.div`
   }
 `;
 
-export const NumberInput = styled.input`
+export const StyledNumberInput = styled.input`
   outline: none;
   width: 100%;
   height: 100%;

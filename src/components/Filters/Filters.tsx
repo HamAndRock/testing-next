@@ -1,9 +1,9 @@
 import React from "react";
 
 import { Container } from "~/theme/components";
-import { ProductPriceRange } from "../ProductPriceRange";
-import { ProductReservation } from "../ProductReservation";
-import { ProductType } from "../ProductType";
+import { PriceFilter } from "../PriceFilter";
+import { ReservationFilter } from "../ReservationFilter";
+import { TypeFilter } from "../TypeFilter";
 import { StyledWrapper, StyledFilters } from "./styled";
 
 const Filters: React.FC = () => {
@@ -11,9 +11,9 @@ const Filters: React.FC = () => {
     <StyledWrapper>
       <Container>
         <StyledFilters>
-          <ProductPriceRange min={0} max={10000} />
-          <ProductType />
-          <ProductReservation />
+          <PriceFilter min={0} max={10000} />
+          <TypeFilter />
+          <ReservationFilter />
         </StyledFilters>
       </Container>
     </StyledWrapper>
