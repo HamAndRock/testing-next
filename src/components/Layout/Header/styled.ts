@@ -1,4 +1,5 @@
 import { styled } from "~/theme";
+import { includeBreakpoint } from "~/theme/mixins";
 
 export const StyledWrapper = styled.header`
   height: ${({ theme }) => theme.rem(80)};
@@ -9,4 +10,8 @@ export const StyledLayout = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
+
+  ${includeBreakpoint.mobile`
+    justify-content: center;
+  `}
 `;

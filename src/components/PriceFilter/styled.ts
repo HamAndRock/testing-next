@@ -1,4 +1,5 @@
 import { css, styled } from "~/theme";
+import { includeBreakpoint } from "~/theme/mixins";
 
 interface Props {
   myPropMax: number;
@@ -19,7 +20,6 @@ const styles = css`
 `;
 
 export const StyledWrapper = styled.div`
-  flex-basis: 30%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -45,6 +45,14 @@ export const StyledWrapper = styled.div`
   input[type="range"]::-ms-thumb {
     ${styles};
   }
+
+  ${includeBreakpoint.laptop`
+      border: none;
+  `}
+
+  ${includeBreakpoint.mobile`
+      align-self: start;
+  `}
 `;
 
 export const StyledName = styled.div`
@@ -63,7 +71,8 @@ export const StyledFirstInput = styled.input<Props>`
   pointer-events: none;
   position: absolute;
   height: 0;
-  width: ${({ theme }) => theme.rem(328)};
+  width: 100%;
+  max-width: ${({ theme }) => theme.rem(258)};
   outline: none;
   z-index: 3;
   ${({ myPropMax, myPropMin }) => myPropMin > myPropMax - 100 && `z-index: 5`}
@@ -73,14 +82,15 @@ export const StyledSecondInput = styled.input`
   pointer-events: none;
   position: absolute;
   height: 0;
-  width: ${({ theme }) => theme.rem(328)};
+  width: 100%;
+  max-width: ${({ theme }) => theme.rem(258)};
   outline: none;
   z-index: 4;
 `;
 
 export const StyledSlider = styled.div`
   position: relative;
-  width: ${({ theme }) => theme.rem(328)};
+  width: ${({ theme }) => theme.rem(258)};
 `;
 
 export const StyledSliderTrack = styled.div`
@@ -107,6 +117,7 @@ export const StyledNumberInputs = styled.div`
 
 export const StyledNumberInputWrapper = styled.div`
   position: relative;
+  width: 100%;
   max-width: ${({ theme }) => theme.rem(116)};
   height: ${({ theme }) => theme.rem(48)};
 

@@ -1,11 +1,19 @@
 import { styled } from "~/theme";
+import { includeBreakpoint } from "~/theme/mixins";
 
 export const StyledWrapper = styled.div`
-  flex-basis: 20%;
   height: 100%;
   border-left: 1px solid;
   border-color: ${({ theme }) => theme.colors.beige};
   padding: ${({ theme }) => theme.rem(16)};
+
+  ${includeBreakpoint.laptop`
+      border: none;
+  `}
+
+  ${includeBreakpoint.mobile`
+      align-self: start;
+  `}
 `;
 
 export const StyledFilterName = styled.div`
@@ -20,7 +28,9 @@ export const StyledFilterName = styled.div`
   }
 `;
 
-export const StyledDropDownContainer = styled.div``;
+export const StyledDropDownContainer = styled.div`
+  position: relative;
+`;
 
 export const StyledDropDownHeader = styled.div`
   margin-bottom: 0.8em;
@@ -47,13 +57,13 @@ export const StyledDropDownHeader = styled.div`
   }
 `;
 
-export const StyledDropDownListContainer = styled.div`
-  width: 100%;
-  max-width: ${({ theme }) => theme.rem(176)};
-`;
+export const StyledDropDownListContainer = styled.div``;
 
 export const StyledDropDownList = styled.ul`
   border: 2px solid ${({ theme }) => theme.colors.beige};
+  position: absolute;
+  width: 100%;
+  max-width: ${({ theme }) => theme.rem(176)};
 `;
 
 export const StyledListItem = styled.div`

@@ -1,12 +1,17 @@
 import { styled } from "~/theme";
+import { includeBreakpoint } from "~/theme/mixins";
 
 export const StyledWrapper = styled.div`
-  flex-basis: 55%;
+  width: 100%;
+  max-width: 704px;
   height: 100%;
-  border-left: 1px solid;
-  border-right: 1px solid;
-  border-color: ${({ theme }) => theme.colors.beige};
   padding: ${({ theme }) => theme.rem(16)};
+
+  ${includeBreakpoint.mobile`
+      border-top: 1px solid;
+      border-bottom: 1px solid;
+      border-color: ${({ theme }) => theme.colors.beige};
+  `}
 `;
 
 export const StyledTitle = styled.div`
@@ -16,8 +21,14 @@ export const StyledTitle = styled.div`
 `;
 
 export const StyledTypesBox = styled.div`
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 16px;
+
+  ${includeBreakpoint.laptop`
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 16px;
+  `}
 `;
 
 export const StyledTypeCard = styled.div`
@@ -27,10 +38,6 @@ export const StyledTypeCard = styled.div`
   height: 88px;
   padding: 8px 12px;
   cursor: pointer;
-
-  &:not(:last-child) {
-    margin-right: 16px;
-  }
 
   &:hover {
     border-color: ${({ theme }) => theme.colors.green};

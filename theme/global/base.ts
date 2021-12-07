@@ -11,6 +11,8 @@ const base = css`
 
   body {
     font-family: ${({ theme }) => theme.fonts.font};
+    color: ${({ theme }) => theme.colors.darkBlue};
+    overflow-x: hidden;
   }
 
   a {
