@@ -1,81 +1,26 @@
 import React from "react";
-import {
-  SvgActionIcon,
-  SvgBedIcon,
-  SvgSeatIcon,
-  SvgShowerIcon,
-  SvgToiletIcon,
-} from "~/icons";
+
+import { useStore } from "~/store";
 import { Container } from "~/theme/components";
-import {
-  StyledWrapper,
-  StyledCardsContainer,
-  StyledCard,
-  StyledImage,
-  StyledName,
-  StyledVehicleType,
-  StyledLocation,
-  StyledFeatures,
-  StyledFeature,
-  StyledFeatureCount,
-  StyledPriceSection,
-  StyledPriceTitle,
-  StyledPrice,
-  StyledCardInfo,
-} from "./styled";
+import { StyledWrapper, StyledCardsContainer } from "./styled";
 import { TProduct } from "./types";
+import { Card } from "~/src/components";
 
-interface TProps {
-  products: TProduct[];
-}
+const Products: React.FC = () => {
+  const {
+    state: { items },
+  } = useStore();
 
-const Products: React.FC<TProps> = ({ products }) => {
+  // if (!items) {
+  //   return <h1>Loading...</h1>;
+  // }
+
   return (
     <StyledWrapper>
       <Container>
         <StyledCardsContainer>
-          {products.map((product: TProduct) => (
-            <StyledCard key={Math.random()}>
-              <StyledImage src={product.pictures[0]} />
-              <StyledCardInfo>
-                <StyledVehicleType>{product.vehicleType}</StyledVehicleType>
-                <StyledName>{product.name}</StyledName>
-                <StyledLocation>{product.location}</StyledLocation>
-                <StyledFeatures>
-                  <StyledFeature>
-                    <SvgSeatIcon />
-                    <StyledFeatureCount>
-                      {product.passengersCapacity}
-                    </StyledFeatureCount>
-                  </StyledFeature>
-                  <StyledFeature>
-                    <SvgBedIcon />
-                    <StyledFeatureCount>
-                      {product.sleepCapacity}
-                    </StyledFeatureCount>
-                  </StyledFeature>
-                  <StyledFeature>
-                    <SvgToiletIcon />
-                    <StyledFeatureCount>{product.toilet}</StyledFeatureCount>
-                  </StyledFeature>
-                  <StyledFeature>
-                    <SvgShowerIcon />
-                    <StyledFeatureCount>{product.shower}</StyledFeatureCount>
-                  </StyledFeature>
-                </StyledFeatures>
-                <StyledPriceSection>
-                  <StyledPriceTitle>Cena od</StyledPriceTitle>
-                  <StyledPrice>
-                    {product.price.toLocaleString()} Kč/den
-                    {product.instantBookable && (
-                      <span>
-                        <SvgActionIcon />
-                      </span>
-                    )}
-                  </StyledPrice>
-                </StyledPriceSection>
-              </StyledCardInfo>
-            </StyledCard>
+          {items.map((product: TProduct) => (
+            <Card key={product.name + Math.random()} product={product} />
           ))}
         </StyledCardsContainer>
       </Container>

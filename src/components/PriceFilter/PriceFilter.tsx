@@ -67,8 +67,8 @@ const PriceFilter: React.FC<Props> = ({ min, max }) => {
           max={max}
           value={minVal}
           ref={minValRef}
-          myPropMax={minVal}
-          myPropMin={max}
+          maxProp={minVal}
+          minProp={max}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             const value = Math.min(+event.target.value, maxVal - 1);
             setMinVal(value);

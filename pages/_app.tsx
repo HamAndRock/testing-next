@@ -3,9 +3,10 @@ import { AppProps } from "next/app";
 
 import { ThemeProvider, theme } from "~/theme";
 import { GlobalStyle } from "~/theme/global-style";
+import { AppProvider } from "~/store/context";
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => (
-  <>
+  <AppProvider>
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Component {...pageProps} />
@@ -32,7 +33,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => (
         font-style: normal;
       }
     `}</style>
-  </>
+  </AppProvider>
 );
 
 export default App;

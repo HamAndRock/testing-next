@@ -1,11 +1,6 @@
 import { css, styled } from "~/theme";
 import { includeBreakpoint } from "~/theme/mixins";
 
-interface Props {
-  myPropMax: number;
-  myPropMin: number;
-}
-
 const styles = css`
   -webkit-appearance: none;
   width: 24px;
@@ -67,7 +62,10 @@ export const StyledContainer = styled.div`
   margin-bottom: ${({ theme }) => theme.rem(26)};
 `;
 
-export const StyledFirstInput = styled.input<Props>`
+export const StyledFirstInput = styled.input<{
+  maxProp: number;
+  minProp: number;
+}>`
   pointer-events: none;
   position: absolute;
   height: 0;
@@ -75,7 +73,7 @@ export const StyledFirstInput = styled.input<Props>`
   max-width: ${({ theme }) => theme.rem(258)};
   outline: none;
   z-index: 3;
-  ${({ myPropMax, myPropMin }) => myPropMin > myPropMax - 100 && `z-index: 5`}
+  ${({ maxProp, minProp }) => minProp > maxProp - 100 && `z-index: 5`}
 `;
 
 export const StyledSecondInput = styled.input`

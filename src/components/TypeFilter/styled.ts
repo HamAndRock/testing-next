@@ -31,13 +31,15 @@ export const StyledTypesBox = styled.div`
   `}
 `;
 
-export const StyledTypeCard = styled.div`
+export const StyledTypeCard = styled.div<{ active?: boolean }>`
   border: 2px solid ${({ theme }) => theme.colors.beige};
   border-radius: 8px;
   min-width: 156px;
   height: 88px;
   padding: 8px 12px;
   cursor: pointer;
+  transition: border-color 0.2s ease-in;
+  border-color: ${({ active, theme }) => active && theme.colors.green};
 
   &:hover {
     border-color: ${({ theme }) => theme.colors.green};

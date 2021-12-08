@@ -1,6 +1,6 @@
 import React from "react";
 
-import { css, styled } from "../";
+import { styled } from "../";
 
 interface TProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement | HTMLLinkElement> {}
@@ -11,28 +11,24 @@ const Button: React.FC<TProps> = ({ children, onClick }) => (
   </StyledButton>
 );
 
-const styles = css`
+const StyledButton = styled.button`
   color: white;
-  display: inline-block;
-  font: ${({ theme }) => `${theme.rem(14)} ${theme.fonts.fontBold}`};
-  height: ${({ theme }) => theme.rem(50)};
-  min-width: ${({ theme }) => theme.rem(150)};
+  display: block;
+  font-weight: bold;
+  font-size: 16px;
   padding-left: ${({ theme }) => theme.rem(35)};
   padding-right: ${({ theme }) => theme.rem(35)};
-  text-transform: uppercase;
-  transition: background-color 0.2s ease-in;
-`;
-
-const StyledButton = styled.button<{ inverted?: boolean }>`
-  ${styles};
-  background-color: ${({ inverted, theme }) =>
-    inverted ? theme.colors.black : theme.colors.orange};
+  height: ${({ theme }) => theme.rem(48)};
+  background-color: ${({ theme }) => theme.colors.green};
+  border-radius: ${({ theme }) => theme.rem(8)};
   border: none;
   cursor: pointer;
+  transition: background-color 0.2s ease-in;
+  margin: 0 auto;
+  margin-bottom: ${({ theme }) => theme.rem(100)};
 
   &:hover {
-    background-color: ${({ inverted, theme }) =>
-      inverted ? theme.colors.orange : theme.colors.black};
+    background-color: ${({ theme }) => theme.colors.orange};
   }
 `;
 
