@@ -16,7 +16,7 @@ export const StyledWrapper = styled.div`
   `}
 `;
 
-export const StyledFilterName = styled.div`
+export const StyledFilterName = styled.h3`
   color: ${({ theme }) => theme.colors.darkGrey};
   margin-bottom: ${({ theme }) => theme.rem(26)};
   letter-spacing: 0;
@@ -66,7 +66,7 @@ export const StyledDropDownList = styled.ul`
   max-width: ${({ theme }) => theme.rem(176)};
 `;
 
-export const StyledListItem = styled.div`
+export const StyledListItem = styled.li`
   height: ${({ theme }) => theme.rem(48)};
   display: flex;
   align-items: center;

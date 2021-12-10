@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { SvgActionIcon } from "~/icons";
+import { useStore } from "~/store";
+import { filterData } from "~/store/actions";
 
 import {
   StyledWrapper,
@@ -10,18 +12,29 @@ import {
   StyledListItem,
 } from "./styled";
 
-const options = ["Ano", "Ne"];
+type TOption = {
+  title: string;
+  val: boolean;
+};
+
+const options: TOption[] = [
+  { title: "Ano", val: true },
+  { title: "Ne", val: false },
+];
 
 const ReservationFilter = () => {
+  const { dispatch } = useStore();
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState<string>(
+    options[0].title
+  );
 
-  const toggling = () => setIsOpen(!isOpen);
+  const handleOpen = (): void => setIsOpen(!isOpen);
 
-  const onOptionClicked = (value) => () => {
-    setSelectedOption(value);
+  const handleOption = (option: TOption) => (): void => {
+    setSelectedOption(option.title);
     setIsOpen(false);
-    console.log(selectedOption);
+    dispatch(filterData("instantBookable", option.val));
   };
 
   return (
@@ -31,17 +44,17 @@ const ReservationFilter = () => {
         <SvgActionIcon />
       </StyledFilterName>
       <StyledDropDownContainer>
-        <StyledDropDownHeader onClick={toggling}>
+        <StyledDropDownHeader onClick={handleOpen}>
           {selectedOption || "Ano"}
         </StyledDropDownHeader>
         {isOpen && (
           <StyledDropDownList>
-            {options.map((option) => (
+            {options.map((option: TOption) => (
               <StyledListItem
-                onClick={onOptionClicked(option)}
+                onClick={handleOption(option)}
                 key={Math.random()}
               >
-                {option}
+                {option.title}
               </StyledListItem>
             ))}
           </StyledDropDownList>

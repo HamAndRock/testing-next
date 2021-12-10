@@ -9,28 +9,36 @@ const reducer: React.Reducer<TState, TAction> = (state, { payload, type }) => {
       return {
         ...state,
         ...payload,
+        filteredItems: payload.items,
       };
     },
 
-    [TActionTypes.FILTER_BY_PRICE]: (): TState => {
-      console.log("price sort");
+    [TActionTypes.FILTER]: (): TState => {
+      const { filters, items } = state;
+      // 1. Setup filter
+      state.filters[payload.filter] = payload.value;
+
+      // 2. Filter data
+      console.log({ filters });
+
+      const filteredItems = !!filters["vehicleType"]
+        ? items.filter(
+            (item) =>
+              item["vehicleType"] === filters["vehicleType"] &&
+              item["instantBookable"] === filters["instantBookable"] &&
+              item["price"] >= filters["priceFrom"] &&
+              item["price"] <= filters["priceTo"]
+          )
+        : items.filter(
+            (item) =>
+              item["instantBookable"] === filters["instantBookable"] &&
+              item["price"] >= filters["priceFrom"] &&
+              item["price"] <= filters["priceTo"]
+          );
 
       return {
         ...state,
-      };
-    },
-
-    [TActionTypes.FILTER_BY_TYPE]: (): TState => {
-      console.log("type sort");
-      return {
-        ...state,
-      };
-    },
-
-    [TActionTypes.FILTER_BY_BOOKING]: (): TState => {
-      console.log("booking sort");
-      return {
-        ...state,
+        filteredItems,
       };
     },
 

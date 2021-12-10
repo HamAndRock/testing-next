@@ -10,12 +10,12 @@ export const StyledWrapper = styled.div`
 `;
 
 export const StyledCardsContainer = styled.div`
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, ${({ theme }) => theme.rem(392)});
   justify-content: space-between;
-  flex-wrap: wrap;
+  grid-gap: ${({ theme }) => theme.rem(30)};
 
-  ${includeBreakpoint.tablet`
+  /* ${includeBreakpoint.tablet`
       justify-content: center;
-  `}
+  `} */
 `;

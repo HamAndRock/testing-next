@@ -14,7 +14,7 @@ export const StyledWrapper = styled.div`
   `}
 `;
 
-export const StyledTitle = styled.div`
+export const StyledTitle = styled.h3`
   color: ${({ theme }) => theme.colors.darkGrey};
   margin-bottom: ${({ theme }) => theme.rem(26)};
   letter-spacing: 0;
@@ -46,11 +46,11 @@ export const StyledTypeCard = styled.div<{ active?: boolean }>`
   }
 `;
 
-export const StyledTypeName = styled.div`
+export const StyledTypeName = styled.p`
   margin-bottom: 5px;
 `;
 
-export const StyledTypeDescr = styled.div`
+export const StyledTypeDescr = styled.p`
   color: ${({ theme }) => theme.colors.darkGrey};
   font-size: 12px;
   letter-spacing: 0;

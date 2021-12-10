@@ -42,7 +42,7 @@ export const StyledCardInfo = styled.div`
   padding: ${({ theme }) => theme.rem(16)};
 `;
 
-export const StyledName = styled.div`
+export const StyledName = styled.h2`
   font-size: ${({ theme }) => theme.rem(24)};
   font-weight: bold;
   letter-spacing: 0;
@@ -59,7 +59,7 @@ export const StyledName = styled.div`
   }
 `;
 
-export const StyledVehicleType = styled.div`
+export const StyledVehicleType = styled.p`
   font-size: ${({ theme }) => theme.rem(12)};
   font-weight: bold;
   letter-spacing: 1px;
@@ -68,7 +68,7 @@ export const StyledVehicleType = styled.div`
   margin-bottom: ${({ theme }) => theme.rem(10)};
 `;
 
-export const StyledLocation = styled.div`
+export const StyledLocation = styled.p`
   font-size: ${({ theme }) => theme.rem(14)};
   letter-spacing: 0px;
   margin-bottom: ${({ theme }) => theme.rem(10)};
@@ -90,7 +90,7 @@ export const StyledFeature = styled.div`
   margin-right: ${({ theme }) => theme.rem(10)};
 `;
 
-export const StyledFeatureCount = styled.div`
+export const StyledFeatureCount = styled.p`
   margin-left: ${({ theme }) => theme.rem(4)};
 `;
 
@@ -101,7 +101,7 @@ export const StyledPriceSection = styled.div`
   align-items: center;
 `;
 
-export const StyledPriceTitle = styled.div`
+export const StyledPriceTitle = styled.p`
   letter-spacing: 0px;
   color: ${({ theme }) => theme.colors.darkGrey};
 `;

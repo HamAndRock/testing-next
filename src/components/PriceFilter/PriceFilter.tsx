@@ -1,4 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useStore } from "~/store";
+import { filterData } from "~/store/actions";
 
 import {
   StyledWrapper,
@@ -20,6 +22,7 @@ interface Props {
 }
 
 const PriceFilter: React.FC<Props> = ({ min, max }) => {
+  const { dispatch } = useStore();
   const [minVal, setMinVal] = useState(min);
   const [maxVal, setMaxVal] = useState(max);
   const minValRef = useRef<HTMLInputElement>(null);
@@ -57,6 +60,33 @@ const PriceFilter: React.FC<Props> = ({ min, max }) => {
     }
   }, [maxVal, getPercent]);
 
+  const handleRangeMinValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Math.min(+event.target.value, maxVal - 1);
+    setMinVal(value);
+    dispatch(filterData("priceFrom", value));
+  };
+
+  const handleRangeMaxValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Math.max(+event.target.value, minVal + 1);
+    setMaxVal(value);
+    dispatch(filterData("priceTo", value));
+  };
+
+  const handleNumberMinValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const clearValue = event.target.value.replace(/\D/g, "");
+    const value = +clearValue > maxVal ? maxVal - 1 : +clearValue;
+    setMinVal(value);
+    dispatch(filterData("priceFrom", value));
+  };
+
+  const handleNumberMaxValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const clearValue = event.target.value.replace(/\D/g, "");
+    const value =
+      +clearValue > max ? max : +clearValue < minVal ? minVal + 1 : +clearValue;
+    setMaxVal(value);
+    dispatch(filterData("priceTo", value));
+  };
+
   return (
     <StyledWrapper>
       <StyledName>Cena za den</StyledName>
@@ -69,10 +99,7 @@ const PriceFilter: React.FC<Props> = ({ min, max }) => {
           ref={minValRef}
           maxProp={minVal}
           minProp={max}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            const value = Math.min(+event.target.value, maxVal - 1);
-            setMinVal(value);
-          }}
+          onChange={handleRangeMinValue}
           className="thumb"
         />
         <StyledSecondInput
@@ -81,10 +108,7 @@ const PriceFilter: React.FC<Props> = ({ min, max }) => {
           max={max}
           value={maxVal}
           ref={maxValRef}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            const value = Math.max(+event.target.value, minVal + 1);
-            setMaxVal(value);
-          }}
+          onChange={handleRangeMaxValue}
           className="thumb"
         />
         <StyledSlider>
@@ -96,31 +120,15 @@ const PriceFilter: React.FC<Props> = ({ min, max }) => {
         <StyledNumberInputWrapper>
           <StyledNumberInput
             type="text"
-            value={minVal.toLocaleString()}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              const clearValue = event.target.value.replace(/\D/g, "");
-              const value = +clearValue > maxVal ? maxVal - 1 : +clearValue;
-              // > max
-              // ? max
-              // : +clearValue;
-              setMinVal(value);
-            }}
+            value={minVal.toLocaleString("ru-RU")}
+            onChange={handleNumberMinValue}
           />
         </StyledNumberInputWrapper>
         <StyledNumberInputWrapper>
           <StyledNumberInput
             type="text"
-            value={maxVal.toLocaleString()}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              const clearValue = event.target.value.replace(/\D/g, "");
-              const value =
-                +clearValue > max
-                  ? max
-                  : +clearValue < minVal
-                  ? minVal + 1
-                  : +clearValue;
-              setMaxVal(value);
-            }}
+            value={maxVal.toLocaleString("ru-RU")}
+            onChange={handleNumberMaxValue}
           />
         </StyledNumberInputWrapper>
       </StyledNumberInputs>

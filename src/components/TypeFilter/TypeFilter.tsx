@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { filterByType, useStore } from "~/store";
+import { useStore } from "~/store";
+import { filterData } from "~/store/actions";
 
 import {
   StyledWrapper,
@@ -13,28 +14,32 @@ import {
 const filterTypes = [
   {
     filterName: "Campervan",
+    option: "Campervan",
     descr: "Obytka s rozměry osobáku, se kterou dojedete všude.",
   },
   {
-    filterName: "Integrál",
+    filterName: "Intergrated",
+    option: "Integrál",
     descr: "Král mezi karavany. Luxus na kolech.",
   },
   {
-    filterName: "Vestavba",
+    filterName: "BuiltIn",
+    option: "Vestavba",
     descr: "Celý byt geniálně poskládaný do dodávky.",
   },
   {
-    filterName: "Přívěs",
+    filterName: "Alcove",
+    option: "Přívěs",
     descr: "Tažný karavan za vaše auto. Od kapkovitých až po rodinné.",
   },
 ];
 
 const TypeFilter = () => {
   const [active, setActive] = useState("");
-  const { state, dispatch } = useStore();
+  const { dispatch } = useStore();
 
   const handleTypeFilter = (filterName: string) => {
-    dispatch(filterByType(filterName));
+    dispatch(filterData("vehicleType", filterName));
     setActive(filterName);
   };
 
@@ -42,13 +47,13 @@ const TypeFilter = () => {
     <StyledWrapper>
       <StyledTitle>Typ karavanu</StyledTitle>
       <StyledTypesBox>
-        {filterTypes.map(({ filterName, descr }) => (
+        {filterTypes.map(({ filterName, option, descr }) => (
           <StyledTypeCard
-            key={filterName}
+            key={option}
             onClick={() => handleTypeFilter(filterName)}
-            active={active === filterName}
+            active={active === option}
           >
-            <StyledTypeName>{filterName}</StyledTypeName>
+            <StyledTypeName>{option}</StyledTypeName>
             <StyledTypeDescr>{descr}</StyledTypeDescr>
           </StyledTypeCard>
         ))}
