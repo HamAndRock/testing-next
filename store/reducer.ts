@@ -14,13 +14,11 @@ const reducer: React.Reducer<TState, TAction> = (state, { payload, type }) => {
     },
 
     [TActionTypes.FILTER]: (): TState => {
-      const { filters, items } = state;
+      const { filters, items, itemsPerPage, currentPage } = state;
       // 1. Setup filter
       state.filters[payload.filter] = payload.value;
 
       // 2. Filter data
-      console.log({ filters });
-
       const filteredItems = !!filters["vehicleType"]
         ? items.filter(
             (item) =>
@@ -39,13 +37,17 @@ const reducer: React.Reducer<TState, TAction> = (state, { payload, type }) => {
       return {
         ...state,
         filteredItems,
+        currentPage: filteredItems.length >= itemsPerPage ? currentPage : 1,
+        // currentPage: 1,
       };
     },
 
     [TActionTypes.LOAD_MORE]: (): TState => {
-      console.log("load more");
+      const { currentPage } = state;
+
       return {
         ...state,
+        currentPage: currentPage + 1,
       };
     },
 

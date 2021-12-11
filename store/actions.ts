@@ -1,23 +1,16 @@
-import { TProduct, TProducts } from "~/src/components/Products/types";
-import { TFilters, TState } from "./initialState";
+import { TData, TFilters } from "./initialState";
 
 export enum TActionTypes {
   SET_DATA = "SET_DATA",
   FILTER = "FILTER",
   LOAD_MORE = "LOAD_MORE",
 }
-
 export interface TAction {
   payload: any;
   type: TActionTypes;
 }
 
-interface TPriceFilter {
-  min: number;
-  max: number;
-}
-
-export const setData = (data: TState): TAction => ({
+export const setData = (data: TData): TAction => ({
   payload: data,
   type: TActionTypes.SET_DATA,
 });

@@ -6,11 +6,17 @@ export interface TFilters {
   priceFrom: number;
   priceTo: number;
 }
-export interface TState {
+
+export interface TData {
   count: number;
   items: TProduct[];
+}
+
+export interface TState extends TData {
   filteredItems: TProduct[];
   filters: TFilters;
+  itemsPerPage: number;
+  currentPage: number;
 }
 
 const initialState: TState = {
@@ -23,6 +29,8 @@ const initialState: TState = {
     priceFrom: 0,
     priceTo: 10000,
   },
+  itemsPerPage: 6,
+  currentPage: 1,
 };
 
 export { initialState };

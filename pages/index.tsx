@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { NextPage } from "next";
 
 import { Layout, Filters, Products } from "~/src/components";
 import { TProducts } from "~/src/components/Products/types";
-import { Button } from "~/theme/components/Button";
-import { useStore } from "~/store";
-import { setData } from "~/store/actions";
+import { LoadButton } from "~/theme/components/LoadButton";
+import { useStore, setData } from "~/store";
 
 interface TProps extends TProducts {}
 
-const IndexPage: NextPage<TProps> = (props) => {
-  const { state, dispatch } = useStore();
-  const { data } = props;
+const IndexPage: NextPage<TProps> = ({ data }) => {
+  const { dispatch } = useStore();
 
   useEffect(() => {
     if (data && data.items.length) {
@@ -23,7 +21,7 @@ const IndexPage: NextPage<TProps> = (props) => {
     <Layout title="Home page">
       <Filters />
       <Products />
-      <Button>Načíst další</Button>
+      <LoadButton />
     </Layout>
   );
 };

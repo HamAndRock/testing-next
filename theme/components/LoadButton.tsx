@@ -1,15 +1,28 @@
 import React from "react";
+import { LoadMore, useStore } from "~/store";
 
-import { styled } from "../";
+import { styled } from "..";
 
-interface TProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement | HTMLLinkElement> {}
+const LoadButton: React.FC = () => {
+  const { state, dispatch } = useStore();
+  const { currentPage, itemsPerPage, filteredItems } = state;
 
-const Button: React.FC<TProps> = ({ children, onClick }) => (
-  <StyledButton onClick={onClick} type="button">
-    {children}
-  </StyledButton>
-);
+  const isShownButton = currentPage * itemsPerPage < filteredItems.length;
+
+  const handleClick = () => {
+    dispatch(LoadMore());
+  };
+
+  return (
+    <>
+      {isShownButton && (
+        <StyledButton type="button" onClick={handleClick}>
+          Načíst další
+        </StyledButton>
+      )}
+    </>
+  );
+};
 
 const StyledButton = styled.button`
   color: white;
@@ -32,4 +45,4 @@ const StyledButton = styled.button`
   }
 `;
 
-export { Button };
+export { LoadButton };

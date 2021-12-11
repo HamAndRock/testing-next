@@ -8,15 +8,17 @@ import { Card } from "~/src/components";
 
 const Products: React.FC = () => {
   const {
-    state: { filteredItems },
+    state: { filteredItems, currentPage, itemsPerPage },
   } = useStore();
+
+  const products = filteredItems.slice(0, currentPage * itemsPerPage);
 
   return (
     <StyledWrapper>
       <Container>
         <StyledCardsContainer>
-          {filteredItems.length &&
-            filteredItems.map((product: TProduct) => (
+          {products.length &&
+            products.map((product: TProduct) => (
               <Card key={product.name + Math.random()} product={product} />
             ))}
         </StyledCardsContainer>
