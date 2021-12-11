@@ -36,27 +36,37 @@ const filterTypes = [
 
 const TypeFilter = () => {
   const [active, setActive] = useState("");
-  const { dispatch } = useStore();
+  const {
+    dispatch,
+    state: { filters },
+  } = useStore();
 
   const handleTypeFilter = (filterName: string) => {
-    dispatch(filterData("vehicleType", filterName));
-    setActive(filterName);
+    if (filterName !== filters.vehicleType) {
+      dispatch(filterData("vehicleType", filterName));
+      setActive(filterName);
+    } else {
+      dispatch(filterData("vehicleType", ""));
+      setActive("");
+    }
   };
 
   return (
     <StyledWrapper>
       <StyledTitle>Typ karavanu</StyledTitle>
       <StyledTypesBox>
-        {filterTypes.map(({ filterName, option, descr }) => (
-          <StyledTypeCard
-            key={option}
-            onClick={() => handleTypeFilter(filterName)}
-            active={active === option}
-          >
-            <StyledTypeName>{option}</StyledTypeName>
-            <StyledTypeDescr>{descr}</StyledTypeDescr>
-          </StyledTypeCard>
-        ))}
+        {filterTypes.map(({ filterName, option, descr }) => {
+          return (
+            <StyledTypeCard
+              key={option}
+              onClick={() => handleTypeFilter(filterName)}
+              active={active === filterName}
+            >
+              <StyledTypeName>{option}</StyledTypeName>
+              <StyledTypeDescr>{descr}</StyledTypeDescr>
+            </StyledTypeCard>
+          );
+        })}
       </StyledTypesBox>
     </StyledWrapper>
   );
