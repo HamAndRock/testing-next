@@ -22,7 +22,7 @@ export const StyledCard = styled.div`
   transition: box-shadow 0.2s ease-in;
 
   &:hover {
-    box-shadow: 0px 5px 15px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px 5px rgba(0, 0, 0, 0.1);
   }
 
   ${includeBreakpoint.mobile`
@@ -102,7 +102,7 @@ export const StyledPriceSection = styled.div`
 `;
 
 export const StyledPriceTitle = styled.p`
-  letter-spacing: 0px;
+  letter-spacing: 0;
   color: ${({ theme }) => theme.colors.darkGrey};
 `;
 

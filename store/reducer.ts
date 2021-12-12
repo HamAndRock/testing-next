@@ -38,7 +38,6 @@ const reducer: React.Reducer<TState, TAction> = (state, { payload, type }) => {
         ...state,
         filteredItems,
         currentPage: filteredItems.length >= itemsPerPage ? currentPage : 1,
-        // currentPage: 1,
       };
     },
 

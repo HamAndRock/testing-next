@@ -10,6 +10,7 @@ export const StyledLayout = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
+  padding-left: ${({ theme }) => theme.rem(14)};
 
   ${includeBreakpoint.mobile`
     justify-content: center;

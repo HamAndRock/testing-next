@@ -24,7 +24,7 @@ const options: TOption[] = [
 
 const ReservationFilter = () => {
   const { dispatch } = useStore();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>(
     options[0].title
   );
@@ -49,14 +49,16 @@ const ReservationFilter = () => {
         </StyledDropDownHeader>
         {isOpen && (
           <StyledDropDownList>
-            {options.map((option: TOption) => (
-              <StyledListItem
-                onClick={handleOption(option)}
-                key={Math.random()}
-              >
-                {option.title}
-              </StyledListItem>
-            ))}
+            {options.map(
+              (option: TOption): React.ReactElement => (
+                <StyledListItem
+                  onClick={handleOption(option)}
+                  key={Math.random()}
+                >
+                  {option.title}
+                </StyledListItem>
+              )
+            )}
           </StyledDropDownList>
         )}
       </StyledDropDownContainer>

@@ -15,15 +15,15 @@ import {
   StyledNumberInputWrapper,
 } from "./styled";
 
-interface Props {
+interface TProps {
   min: number;
   max: number;
 }
 
-const PriceFilter: React.FC<Props> = ({ min, max }) => {
+const PriceFilter: React.FC<TProps> = ({ min, max }) => {
   const { dispatch } = useStore();
-  const [minVal, setMinVal] = useState(min);
-  const [maxVal, setMaxVal] = useState(max);
+  const [minVal, setMinVal] = useState<number>(min);
+  const [maxVal, setMaxVal] = useState<number>(max);
   const minValRef = useRef<HTMLInputElement>(null);
   const maxValRef = useRef<HTMLInputElement>(null);
   const range = useRef<HTMLDivElement>(null);
@@ -59,26 +59,34 @@ const PriceFilter: React.FC<Props> = ({ min, max }) => {
     }
   }, [maxVal, getPercent]);
 
-  const handleRangeMinValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleRangeMinValue = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     const value = Math.min(+event.target.value, maxVal - 1);
     setMinVal(value);
     dispatch(filterData("priceFrom", value));
   };
 
-  const handleRangeMaxValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleRangeMaxValue = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     const value = Math.max(+event.target.value, minVal + 1);
     setMaxVal(value);
     dispatch(filterData("priceTo", value));
   };
 
-  const handleNumberMinValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNumberMinValue = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     const clearValue = event.target.value.replace(/\D/g, "");
     const value = +clearValue > maxVal ? maxVal - 1 : +clearValue;
     setMinVal(value);
     dispatch(filterData("priceFrom", value));
   };
 
-  const handleNumberMaxValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNumberMaxValue = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     const clearValue = event.target.value.replace(/\D/g, "");
     const value =
       +clearValue > max ? max : +clearValue < minVal ? minVal + 1 : +clearValue;

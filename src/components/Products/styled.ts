@@ -14,8 +14,10 @@ export const StyledCardsContainer = styled.div`
   grid-template-columns: repeat(auto-fill, ${({ theme }) => theme.rem(392)});
   justify-content: space-between;
   grid-gap: ${({ theme }) => theme.rem(30)};
+`;
 
-  /* ${includeBreakpoint.tablet`
-      justify-content: center;
-  `} */
+export const StyledNotFound = styled.h2`
+  margin: 0 auto;
+  font-size: 25px;
+  font-weight: bold;
 `;

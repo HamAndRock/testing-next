@@ -23,11 +23,11 @@ import {
   StyledCardInfo,
 } from "./styled";
 
-interface TCard {
+interface TProps {
   product: TProduct;
 }
 
-const Card: React.FC<TCard> = ({ product }) => (
+const Card: React.FC<TProps> = ({ product }) => (
   <StyledCard>
     <StyledImage src={product.pictures[0]} />
     <StyledCardInfo>

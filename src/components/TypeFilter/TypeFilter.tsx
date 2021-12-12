@@ -11,37 +11,43 @@ import {
   StyledTypeDescr,
 } from "./styled";
 
-const filterTypes = [
+type TFilterTypes = {
+  filterName: string;
+  option: string;
+  description: string;
+};
+
+const filterTypes: TFilterTypes[] = [
   {
     filterName: "Campervan",
     option: "Campervan",
-    descr: "Obytka s rozměry osobáku, se kterou dojedete všude.",
+    description: "Obytka s rozměry osobáku, se kterou dojedete všude.",
   },
   {
     filterName: "Intergrated",
     option: "Integrál",
-    descr: "Král mezi karavany. Luxus na kolech.",
+    description: "Král mezi karavany. Luxus na kolech.",
   },
   {
     filterName: "BuiltIn",
     option: "Vestavba",
-    descr: "Celý byt geniálně poskládaný do dodávky.",
+    description: "Celý byt geniálně poskládaný do dodávky.",
   },
   {
     filterName: "Alcove",
     option: "Přívěs",
-    descr: "Tažný karavan za vaše auto. Od kapkovitých až po rodinné.",
+    description: "Tažný karavan za vaše auto. Od kapkovitých až po rodinné.",
   },
 ];
 
 const TypeFilter = () => {
-  const [active, setActive] = useState("");
+  const [active, setActive] = useState<string>("");
   const {
     dispatch,
     state: { filters },
   } = useStore();
 
-  const handleTypeFilter = (filterName: string) => {
+  const handleTypeFilter = (filterName: string): void => {
     if (filterName !== filters.vehicleType) {
       dispatch(filterData("vehicleType", filterName));
       setActive(filterName);
@@ -55,18 +61,18 @@ const TypeFilter = () => {
     <StyledWrapper>
       <StyledTitle>Typ karavanu</StyledTitle>
       <StyledTypesBox>
-        {filterTypes.map(({ filterName, option, descr }) => {
-          return (
+        {filterTypes.map(
+          ({ filterName, option, description }): React.ReactElement => (
             <StyledTypeCard
               key={option}
               onClick={() => handleTypeFilter(filterName)}
               active={active === filterName}
             >
               <StyledTypeName>{option}</StyledTypeName>
-              <StyledTypeDescr>{descr}</StyledTypeDescr>
+              <StyledTypeDescr>{description}</StyledTypeDescr>
             </StyledTypeCard>
-          );
-        })}
+          )
+        )}
       </StyledTypesBox>
     </StyledWrapper>
   );

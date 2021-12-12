@@ -6,6 +6,8 @@ export const StyledLink = styled.a`
   width: ${({ theme }) => theme.rem(180)};
 `;
 
-export const StyledImage = styled.img`
-  max-width: 100%;
+export const StyledImage = styled.div`
+  width: ${({ theme }) => theme.rem(180)};
+  height: ${({ theme }) => theme.rem(35)};
+  position: relative;
 `;
