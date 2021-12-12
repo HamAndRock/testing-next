@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
+import { useDebounce } from "~/src/hooks/useDebounce";
+
 import { useStore, filterData } from "~/store";
 import {
   StyledWrapper,
@@ -28,11 +30,34 @@ const PriceFilter: React.FC<TProps> = ({ min, max }) => {
   const maxValRef = useRef<HTMLInputElement>(null);
   const range = useRef<HTMLDivElement>(null);
 
+  const minDebouncedValue = useDebounce(minVal, 500);
+  const maxDebouncedValue = useDebounce(maxVal, 500);
+
+  useEffect(() => {
+    dispatch(filterData("priceFrom", minDebouncedValue));
+  }, [minDebouncedValue, dispatch]);
+
+  useEffect(() => {
+    dispatch(filterData("priceTo", maxDebouncedValue));
+  }, [maxDebouncedValue, dispatch]);
+
   // Convert to percentage
   const getPercent = useCallback(
     (value: number) => Math.round(((value - min) / (max - min)) * 100),
     [min, max]
   );
+
+  useEffect(() => {
+    if (maxValRef.current) {
+      const minPercent = getPercent(minVal);
+      const maxPercent = getPercent(+maxValRef.current.value);
+
+      if (range.current) {
+        range.current.style.left = `${minPercent}%`;
+        range.current.style.width = `${maxPercent - minPercent}%`;
+      }
+    }
+  }, [minVal, getPercent]);
 
   // Set width of the range to decrease from the left side
   useEffect(() => {
@@ -64,7 +89,6 @@ const PriceFilter: React.FC<TProps> = ({ min, max }) => {
   ): void => {
     const value = Math.min(+event.target.value, maxVal - 1);
     setMinVal(value);
-    dispatch(filterData("priceFrom", value));
   };
 
   const handleRangeMaxValue = (
@@ -72,7 +96,6 @@ const PriceFilter: React.FC<TProps> = ({ min, max }) => {
   ): void => {
     const value = Math.max(+event.target.value, minVal + 1);
     setMaxVal(value);
-    dispatch(filterData("priceTo", value));
   };
 
   const handleNumberMinValue = (
@@ -81,7 +104,6 @@ const PriceFilter: React.FC<TProps> = ({ min, max }) => {
     const clearValue = event.target.value.replace(/\D/g, "");
     const value = +clearValue > maxVal ? maxVal - 1 : +clearValue;
     setMinVal(value);
-    dispatch(filterData("priceFrom", value));
   };
 
   const handleNumberMaxValue = (
@@ -91,9 +113,7 @@ const PriceFilter: React.FC<TProps> = ({ min, max }) => {
     const value =
       +clearValue > max ? max : +clearValue < minVal ? minVal + 1 : +clearValue;
     setMaxVal(value);
-    dispatch(filterData("priceTo", value));
   };
-
   return (
     <StyledWrapper>
       <StyledName>Cena za den</StyledName>

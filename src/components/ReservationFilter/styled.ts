@@ -72,6 +72,8 @@ export const StyledListItem = styled.li`
   align-items: center;
   padding: 0 ${({ theme }) => theme.rem(12)};
   cursor: pointer;
+  z-index: 201;
+  position: relative;
   background-color: white;
 
   &:hover {

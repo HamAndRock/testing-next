@@ -16,27 +16,30 @@ const reducer: React.Reducer<TState, TAction> = (state, { payload, type }) => {
     [TActionTypes.FILTER]: (): TState => {
       const { filters, items, itemsPerPage, currentPage } = state;
       // 1. Setup filter
-      state.filters[payload.filter] = payload.value;
+      const stateFilters = JSON.parse(JSON.stringify(filters));
+
+      stateFilters[payload.filter] = payload.value;
 
       // 2. Filter data
-      const filteredItems = !!filters["vehicleType"]
+      const filteredItems = !!stateFilters["vehicleType"]
         ? items.filter(
             (item) =>
-              item["vehicleType"] === filters["vehicleType"] &&
-              item["instantBookable"] === filters["instantBookable"] &&
-              item["price"] >= filters["priceFrom"] &&
-              item["price"] <= filters["priceTo"]
+              item["vehicleType"] === stateFilters["vehicleType"] &&
+              item["instantBookable"] === stateFilters["instantBookable"] &&
+              item["price"] >= stateFilters["priceFrom"] &&
+              item["price"] <= stateFilters["priceTo"]
           )
         : items.filter(
             (item) =>
-              item["instantBookable"] === filters["instantBookable"] &&
-              item["price"] >= filters["priceFrom"] &&
-              item["price"] <= filters["priceTo"]
+              item["instantBookable"] === stateFilters["instantBookable"] &&
+              item["price"] >= stateFilters["priceFrom"] &&
+              item["price"] <= stateFilters["priceTo"]
           );
 
       return {
         ...state,
         filteredItems,
+        filters: stateFilters,
         currentPage: filteredItems.length >= itemsPerPage ? currentPage : 1,
       };
     },

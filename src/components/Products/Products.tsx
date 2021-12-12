@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 
 import { useStore } from "~/store";
 import { Container } from "~/theme/components";
@@ -11,13 +11,15 @@ const Products: React.FC = () => {
     state: { filteredItems, currentPage, itemsPerPage },
   } = useStore();
 
-  const products = filteredItems.slice(0, currentPage * itemsPerPage);
+  const products = useMemo(() => {
+    return filteredItems.slice(0, currentPage * itemsPerPage);
+  }, [currentPage, itemsPerPage, filteredItems]);
 
   return (
     <StyledWrapper>
       <Container>
         <StyledCardsContainer>
-          {products.length ? (
+          {products.length !== 0 ? (
             products.map(
               (product: TProduct): React.ReactElement => (
                 <Card key={product.name + Math.random()} product={product} />

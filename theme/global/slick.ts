@@ -15,7 +15,9 @@ const slick = css`
   }
 
   .slick-slider {
-    box-shadow: 0 20px 50px -25px rgba(0, 0, 0, 1);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    overflow: hidden;
     box-sizing: border-box;
     user-select: none;
     -webkit-touch-callout: none;

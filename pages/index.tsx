@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import { NextPage } from "next";
 
-import { Layout, Filters, Products } from "~/src/components";
+import { Layout, Filters, Products, LoadButton } from "~/src/components";
 import { TProducts } from "~/src/components/Products/types";
-import { LoadButton } from "~/theme/components/LoadButton";
 import { useStore, setData } from "~/store";
 
 interface TProps extends TProducts {}

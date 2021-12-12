@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   SvgSeatIcon,
   SvgBedIcon,
@@ -6,11 +7,10 @@ import {
   SvgToiletIcon,
   SvgActionIcon,
 } from "~/icons";
-
 import { TProduct } from "../Products/types";
+import { Slider } from "../Slider";
 import {
   StyledCard,
-  StyledImage,
   StyledName,
   StyledVehicleType,
   StyledLocation,
@@ -29,7 +29,7 @@ interface TProps {
 
 const Card: React.FC<TProps> = ({ product }) => (
   <StyledCard>
-    <StyledImage src={product.pictures[0]} />
+    <Slider images={product.pictures} />
     <StyledCardInfo>
       <StyledVehicleType>{product.vehicleType}</StyledVehicleType>
       <StyledName>{product.name}</StyledName>

@@ -30,14 +30,6 @@ export const StyledCard = styled.div`
   `}
 `;
 
-export const StyledImage = styled.img`
-  height: ${({ theme }) => theme.rem(190)};
-  width: 100%;
-  object-fit: cover;
-  border-top-left-radius: ${({ theme }) => theme.rem(8)};
-  border-top-right-radius: ${({ theme }) => theme.rem(8)};
-`;
-
 export const StyledCardInfo = styled.div`
   padding: ${({ theme }) => theme.rem(16)};
 `;

@@ -25,8 +25,8 @@ export const StyledWrapper = styled.div`
   border-color: ${({ theme }) => theme.colors.beige};
 
   input[type="range"] {
-    -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-    background: transparent; /* Otherwise white in Chrome */
+    -webkit-appearance: none;
+    background: transparent;
   }
 
   input[type="range"]::-webkit-slider-thumb {
