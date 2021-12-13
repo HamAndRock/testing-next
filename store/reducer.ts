@@ -15,9 +15,9 @@ const reducer: React.Reducer<TState, TAction> = (state, { payload, type }) => {
 
     [TActionTypes.FILTER]: (): TState => {
       const { filters, items, itemsPerPage, currentPage } = state;
-      // 1. Setup filter
-      const stateFilters = JSON.parse(JSON.stringify(filters));
+      const stateFilters = { ...filters };
 
+      // 1. Setup filter
       stateFilters[payload.filter] = payload.value;
 
       // 2. Filter data

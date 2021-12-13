@@ -47,18 +47,6 @@ const PriceFilter: React.FC<TProps> = ({ min, max }) => {
     [min, max]
   );
 
-  useEffect(() => {
-    if (maxValRef.current) {
-      const minPercent = getPercent(minVal);
-      const maxPercent = getPercent(+maxValRef.current.value);
-
-      if (range.current) {
-        range.current.style.left = `${minPercent}%`;
-        range.current.style.width = `${maxPercent - minPercent}%`;
-      }
-    }
-  }, [minVal, getPercent]);
-
   // Set width of the range to decrease from the left side
   useEffect(() => {
     if (maxValRef.current) {
