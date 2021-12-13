@@ -1,5 +1,5 @@
-import { styled } from "~/theme";
-import { includeBreakpoint } from "~/theme/mixins";
+import { styled } from "~/src/theme";
+import { includeBreakpoint } from "~/src/theme/mixins";
 
 export const StyledWrapper = styled.div`
   padding: ${({ theme }) => theme.rem(30)};

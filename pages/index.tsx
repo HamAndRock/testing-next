@@ -3,7 +3,7 @@ import { NextPage } from "next";
 
 import { Layout, Filters, Products, LoadButton } from "~/src/components";
 import { TProducts } from "~/src/components/Products/types";
-import { useStore, setData } from "~/store";
+import { useStore, setData } from "~/src/store";
 
 interface TProps extends TProducts {}
 

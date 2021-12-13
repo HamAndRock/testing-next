@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { useStore, filterData } from "~/store";
+import { useStore, filterData } from "~/src/store";
 
 import {
   StyledWrapper,

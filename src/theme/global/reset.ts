@@ -1,4 +1,4 @@
-import { css } from "~/theme";
+import { css } from "~/src/theme";
 
 const reset = css`
   html,

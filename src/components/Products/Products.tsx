@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 
-import { useStore } from "~/store";
-import { Container } from "~/theme/components";
+import { useStore } from "~/src/store";
+import { Container } from "~/src/theme/components";
 import { StyledWrapper, StyledCardsContainer, StyledNotFound } from "./styled";
 import { TProduct } from "./types";
 import { Card } from "~/src/components";

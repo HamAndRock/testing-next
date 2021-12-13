@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Container } from "~/theme/components";
+import { Container } from "~/src/theme/components";
 import { PriceFilter } from "../PriceFilter";
 import { ReservationFilter } from "../ReservationFilter";
 import { TypeFilter } from "../TypeFilter";

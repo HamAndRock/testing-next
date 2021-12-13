@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { SvgActionIcon } from "~/icons";
-import { useStore, filterData } from "~/store";
+import { useStore, filterData } from "~/src/store";
 
 import {
   StyledWrapper,

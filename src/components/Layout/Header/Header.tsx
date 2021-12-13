@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Logo } from "./Logo";
-import { Container } from "~/theme/components";
+import { Container } from "~/src/theme/components";
 import { StyledWrapper, StyledLayout } from "./styled";
 
 const Header: React.FC = () => (

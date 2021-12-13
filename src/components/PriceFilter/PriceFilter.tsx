@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import { useDebounce } from "~/src/hooks/useDebounce";
 
-import { useStore, filterData } from "~/store";
+import { useStore, filterData } from "~/src/store";
 import {
   StyledWrapper,
   StyledName,

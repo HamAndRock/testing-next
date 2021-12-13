@@ -1,9 +1,9 @@
 import React from "react";
 import { AppProps } from "next/app";
 
-import { ThemeProvider, theme } from "~/theme";
-import { GlobalStyle } from "~/theme/global-style";
-import { AppProvider } from "~/store/context";
+import { ThemeProvider, theme } from "~/src/theme";
+import { GlobalStyle } from "~/src/theme/global-style";
+import { AppProvider } from "~/src/store/context";
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => (
   <AppProvider>

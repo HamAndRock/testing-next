@@ -1,7 +1,7 @@
 import React from "react";
-import { LoadMore, useStore } from "~/store";
+import { LoadMore, useStore } from "~/src/store";
 
-import { styled } from "~/theme";
+import { styled } from "~/src/theme";
 
 const LoadButton: React.FC = () => {
   const { state, dispatch } = useStore();

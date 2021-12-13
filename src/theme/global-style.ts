@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "~/theme";
+import { createGlobalStyle } from "~/src/theme";
 
 import { base } from "./global/base";
 import { reset } from "./global/reset";

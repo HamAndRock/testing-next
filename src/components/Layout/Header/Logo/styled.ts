@@ -1,4 +1,4 @@
-import { styled } from "~/theme";
+import { styled } from "~/src/theme";
 
 export const StyledWrapper = styled.div``;
 

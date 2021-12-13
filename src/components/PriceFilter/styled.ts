@@ -1,5 +1,5 @@
-import { css, styled } from "~/theme";
-import { includeBreakpoint } from "~/theme/mixins";
+import { css, styled } from "~/src/theme";
+import { includeBreakpoint } from "~/src/theme/mixins";
 
 const styles = css`
   -webkit-appearance: none;
